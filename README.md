@@ -1,5 +1,5 @@
 
-# Simple shop
+# eCommerce-site
 
 ## Opis projektu
 Ten projekt zawiera zarówno frontend, jak i backend aplikacji webowej. Backend jest odpowiedzialny za zarządzanie danymi użytkowników i produktów, natomiast frontend zajmuje się wyświetlaniem interfejsu użytkownika.
