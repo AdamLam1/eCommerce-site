@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Logowanie</title>
+  <link rel="stylesheet" type="text/css" href="/css/styles.css">
+  <script>
+    // Funkcja do otwierania modala
+    function openRegisterModal() {
+      document.getElementById('registerModal').style.display = 'block';
+    }
+
+    // Funkcja do zamykania modala
+    function closeRegisterModal() {
+      document.getElementById('registerModal').style.display = 'none';
+    }
+  </script>
+</head>
+<body>
+  <div class="background"></div>
+  <img class="loginLogo" src="/logo.svg" />
+  <div class="loginForm">
+    <h1 class="loginh1">Logowanie</h1>
+    {{#if error}}
+      <p style="color: red;">{{error}}</p>
+    {{/if}}
+    <form action="/login" method="POST">
+      <label for="username">LOGIN</label>
+      <input type="text" id="username" name="username" required><br><br>
+      <label for="password">HASŁO</label>
+      <input type="password" id="password" name="password" required><br><br>
+      <button type="submit" class="button-3">Zaloguj</button>
+    </form>
+    <br><button class="button-3" onclick="openRegisterModal()">Rejestracja</button>
+  </div>
+
+  <!-- Modal do rejestracji -->
+  <div id="registerModal" style="display: none;">
+    <div class="modal-content">
+      <span class="registerSpan" onclick="closeRegisterModal()" style="float: right; cursor: pointer;">&times;</span>
+      <h2>Rejestracja</h2>
+      <form action="/register" method="POST">
+        <label for="registerUsername">LOGIN</label>
+        <input type="text" id="registerUsername" name="registerUsername" required><br><br>
+        <label for="registerPassword">HASŁO</label>
+        <input type="password" id="registerPassword" name="registerPassword" required><br><br>
+        <button type="submit" class="button-3">Zarejestruj</button>
+      </form>
+    </div>
+  </div>
+</body>
+</html>

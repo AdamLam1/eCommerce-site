@@ -1,0 +1,101 @@
+<header>
+  <nav>
+    <ul>
+      {{#ifCond username '===' "admin"}}
+        <button class="button-3" id="admin-button">Panel Administracyjny</button>
+      {{/ifCond}}
+      <li>Witaj, {{username}}</li>
+      <li>Stan konta: <span id="money">{{money}}</span> zł</li>
+      <li>Koszyk: <span id="cart-items">{{cartItems}}</span></li>
+      <li><button class="button-3" id="cart-button">Pokaż koszyk</button></li>
+      <li><a href="/logout">Wyloguj</a></li>
+    </ul>
+  </nav>
+</header>
+
+<!-- Admin Panel Modal -->
+<div id="admin-panel-modal" style="display: none;">
+  <div>
+    <h1>Product List</h1>
+    <div id="product-list">
+      <!-- Product List will be injected here by JavaScript -->
+    </div>
+    <button onclick="closeAdminPanel()">Close</button>
+  </div>
+</div>
+
+<script>
+  document.getElementById('admin-button').addEventListener('click', openAdminPanel);
+
+  async function fetchProducts() {
+    try {
+      const response = await fetch('http://localhost:3001/products');
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      const products = await response.json();
+      const productList = document.getElementById('product-list');
+      productList.innerHTML = '';
+      products.forEach(product => {
+        const productItem = document.createElement('div');
+        console.log(product);
+       productItem.innerHTML = `
+    <div class="adminpanel-product-item-container">
+        <div class="adminpanel-product-image-container">
+            <img src='${product.image}' class="adminpanel-admin-product-image" />
+        </div>
+        <div class="adminpanel-product-details-container">
+            <p class="adminpanel-product-title">${product.title}</p>
+            <p class="adminpanel-product-description">${product.description}</p>
+            <div class="adminpanel-product-buttons">
+                <button onclick="editProduct('${product.id}')">Edit</button>
+                <button onclick="deleteProduct('${product.id}')">Delete</button>
+            </div>
+        </div>
+    </div>
+`;
+        productList.appendChild(productItem);
+      });
+    } catch (error) {
+      console.error('Fetch error:', error);
+    }
+  }
+
+  async function editProduct(id) {
+    const newTitle = prompt('Enter new product title:');
+    if (newTitle) {
+      try {
+        await fetch(`http://localhost:3001/products/${id}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ title: newTitle }),
+        });
+        fetchProducts();
+      } catch (error) {
+        console.error('Edit error:', error);
+      }
+    }
+  }
+
+  async function deleteProduct(id) {
+  try {
+    await fetch(`http://localhost:3001/products/${id}`, {
+      method: 'DELETE',
+    });
+    fetchProducts(); 
+  } catch (error) {
+    console.error('Delete error:', error);
+  }
+}
+
+  function openAdminPanel() {
+    document.getElementById('admin-panel-modal').style.display = 'block';
+    fetchProducts();
+  }
+
+  function closeAdminPanel() {
+    document.getElementById('admin-panel-modal').style.display = 'none';
+  }
+</script>

@@ -1,0 +1,86 @@
+[
+  {
+    "id": 1,
+    "title": "Bluetooth Headphones",
+    "description": "Noise-canceling over-ear headphones with high-quality sound",
+    "price": 120,
+    "image": "https://i.ibb.co/p3n9NbW/1.jpg"
+  },
+  {
+    "id": 2,
+    "title": "Smartphone Stand",
+    "description": "Adjustable smartphone stand suitable for all phone models",
+    "price": 15,
+    "image": "https://i.ibb.co/WcVkYPc/2.jpg"
+  },
+  {
+    "id": 3,
+    "title": "Electric Kettle",
+    "description": "1.7L electric kettle with auto shut-off and boil-dry protection",
+    "price": 25,
+    "image": "https://i.ibb.co/XX4RcmD/3.jpg"
+  },
+  {
+    "id": 4,
+    "title": "Wireless Charger",
+    "description": "Fast wireless charger compatible with all Qi-enabled devices",
+    "price": 40,
+    "image": "https://i.ibb.co/6YGG9fL/4.jpg"
+  },
+  {
+    "id": 5,
+    "title": "Fitness Tracker",
+    "description": "Water-resistant fitness tracker with heart rate monitor and GPS",
+    "price": 75,
+    "image": "https://i.ibb.co/qYM26Tw/5.jpg"
+  },
+  {
+    "id": 6,
+    "title": "Portable Blender",
+    "description": "Compact and portable blender for smoothies and shakes",
+    "price": 50,
+    "image": "https://i.ibb.co/42wG3W4/6.jpg"
+  },
+  {
+    "id": 7,
+    "title": "Wireless Earbuds",
+    "description": "True wireless earbuds with charging case and touch controls",
+    "price": 60,
+    "image": "https://i.ibb.co/fkzpt5q/7.jpg"
+  },
+  {
+    "id": 8,
+    "title": "Smart Home Hub",
+    "description": "Central control hub for all your smart home devices",
+    "price": 100,
+    "image": "https://i.ibb.co/hfNfPrD/8.jpg"
+  },
+  {
+    "id": 9,
+    "title": "Robot Vacuum",
+    "description": "Automatic robot vacuum cleaner with app control and scheduling",
+    "price": 250,
+    "image": "https://i.ibb.co/2v9vhTm/9.jpg"
+  },
+  {
+    "id": 10,
+    "title": "LED Desk Lamp",
+    "description": "Adjustable LED desk lamp with multiple brightness levels",
+    "price": 30,
+    "image": "https://i.ibb.co/pwcjbrG/10.jpg"
+  },
+  {
+    "id": 11,
+    "title": "Electric Toothbrush",
+    "description": "Rechargeable electric toothbrush with multiple brushing modes",
+    "price": 55,
+    "image": "https://i.ibb.co/x5XrvcX/11.png"
+  },
+  {
+    "id": 12,
+    "title": "Air Fryer",
+    "description": "Compact air fryer with adjustable temperature control",
+    "price": 90,
+    "image": "https://i.ibb.co/4FyJNVw/12.jpg"
+  }
+]

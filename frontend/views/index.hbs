@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Strona Główna</title>
+  <link rel="stylesheet" type="text/css" href="/css/styles.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+  $(document).ready(function() {
+    $('.add-to-cart').click(function() {
+      const productId = $(this).data('id');
+      $.post('/add-to-cart', { id: productId }, function(response) {
+        if (response.success) {
+          $('#money').text(response.money);
+          $('#cart-items').text(response.cartItems);
+        } else {
+          alert(response.message);
+        }
+      });
+    });
+
+    $('#cart-button').click(function() {
+      $.get('/cart', function(response) {
+        if (response.success) {
+          const cartItems = response.cart;
+          let cartHtml = '';
+          cartItems.forEach(item => {
+            cartHtml += `
+              <div class="cart-item" id="cart-item-${item.id}">
+                <img src="${item.image}" alt="${item.title}">
+                <div class="cart-item-info">
+                  <h4>${item.title}</h4>
+                  <p>${item.price} zł</p>
+                  <p>Ilość: <span class="item-quantity">${item.quantity}</span></p>
+                  <button class="remove-from-cart" data-id="${item.id}">Usuń</button>
+                </div>
+              </div>
+            `;
+          });
+          $('#cart-items-list').html(cartHtml);
+          $('#total-price').text(response.totalPrice);
+          $('#cart-modal').show();
+        }
+      });
+    });
+
+    $(document).on('click', '.remove-from-cart', function() {
+      const productId = $(this).data('id');
+      $.post('/remove-from-cart', { id: productId }, function(response) {
+        if (response.success) {
+          $('#money').text(response.money);
+          $('#cart-items').text(response.cartItems);
+          const quantityElement = $(`#cart-item-${productId}`).find('.item-quantity');
+          const newQuantity = response.quantity;
+          if (newQuantity > 0) {
+            quantityElement.text(newQuantity);
+          } else {
+            $(`#cart-item-${productId}`).remove(); // Usuwamy produkt z listy, gdy ilość wynosi 0
+          }
+          $('#total-price').text(response.totalPrice);
+        } else {
+          alert(response.message);
+        }
+      });
+    });
+
+    $('#close-cart').click(function() {
+      $('#cart-modal').hide();
+    });
+  });
+</script>
+</head>
+<div class="background"></div>
+<body>
+  {{> header}}
+  <main>
+    <div class="products-grid">
+      {{#each products}}
+      <div class="product-card">
+        <img src="{{this.image}}" alt="{{this.title}}">
+        <div class="product-info">
+          <h3>{{this.title}}</h3>
+          <p>{{this.description}}</p>
+          <p class="price">{{this.price}} zł</p>
+          <button class="add-to-cart" data-id="{{this.id}}">Dodaj do koszyka</button>
+        </div>
+      </div>
+      {{/each}}
+    </div>
+  </main>
+
+  <div id="cart-modal" class="modal">
+    <div class="modal-content">
+      <span id="close-cart" class="close">&times;</span>
+      <h2>Twój koszyk</h2>
+      <div id="cart-items-list"></div>
+      <p>Łączna cena: <span id="total-price">0</span> zł</p>
+    </div>
+  </div>
+</body>
+</html>
